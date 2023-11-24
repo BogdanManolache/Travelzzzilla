@@ -11,3 +11,7 @@ npm install
 &
 npm run dev
 ```
+## IMPORTANT
+
+There will be a separate branch for each stage of the project.
+
