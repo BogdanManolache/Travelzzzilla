@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useParams, usePathname } from 'next/navigation';
 
 import {
   HiMagnifyingGlass,
@@ -10,32 +9,32 @@ import {
 
 export default function NavBar() {
   const linkClass =
-    'flex items-center gap-2 px-4 py-2 duration-300 hover:bg-slate-200';
+    'flex items-center gap-2 px-4 py-2 hover:bg-slate-200 focus:outline-none focus-visible:ring focus-visible:ring-slate-200';
 
   return (
     <nav>
       <ul className="flex flex-col gap-4">
         <li>
           <Link href="/" className={linkClass}>
-            <HiOutlineHome />
+            <HiOutlineHome className="stroke-orange-400" />
             <span>Home</span>
           </Link>
         </li>
         <li>
           <Link href="/search" className={linkClass}>
-            <HiMagnifyingGlass />
+            <HiMagnifyingGlass className="fill-orange-400" />
             <span>Search</span>
           </Link>
         </li>
         <li>
           <Link href="/favourites" className={linkClass}>
-            <HiOutlineStar />
+            <HiOutlineStar className="stroke-orange-400" />
             <span>Favourites</span>
           </Link>
         </li>
         <li>
           <Link href="/map" className={linkClass}>
-            <HiOutlineMap />
+            <HiOutlineMap className="stroke-orange-400" />
             <span>Map</span>
           </Link>
         </li>

@@ -2,3 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply text-3xl font-semibold;
+  }
+
+  h2 {
+    @apply mb-10 text-2xl font-semibold;
+  }
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+  @apply rounded-md bg-slate-100 pr-2 text-slate-700;
+}
+
+.leaflet-popup .leaflet-popup-content {
+  @apply flex items-center gap-2 text-sm;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  @apply bg-slate-100;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply border-l-4 border-orange-400;
+}
+
+/*
+.leaflet-popup .leaflet-popup-content span:first-child {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+*/
+
+.hero-image {
+  background-image: linear-gradient(to bottom, #1e293b, transparent),
+    url('../public/hero-image.webp');
+}

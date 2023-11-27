@@ -1,4 +1,4 @@
-import Map from '@/components/Map';
+import Map from '@/app/map/Map';
 
 export const metadata = {
   title: 'Map',
