@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       >
         <Header />
         <Sidebar />
-        <main>
+        <main className="scrollbar-thin scrollbar-thumb-slate-300 scrollbar-thumb-rounded-full scrollbar-track-transparent  overflow-y-scroll">
           <Container>{children}</Container>
         </main>
         <Footer />

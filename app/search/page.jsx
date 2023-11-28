@@ -5,21 +5,21 @@ export const metadata = {
   title: 'Search cities',
 };
 
-export default async function SearchPage() {
-  const cityName = 'brasov';
+export default async function SearchPage({ searchParams }) {
+  const { cityName } = searchParams;
 
   const res = await fetch(
-    `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=10&language=en&format=json`,
+    `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=100&language=en&format=json`,
   );
 
-  const { results } = await res.json();
-  console.log(results);
+  const { results: cities } = await res.json();
 
   return (
     <div className="flex flex-col items-center gap-10 px-6 py-4">
-      <h2>Start looking for your next travel destination</h2>
+      <h2>Find your next travel destination</h2>
       <SearchForm />
-      <SearchResults results={results} />
+
+      <SearchResults cities={cities} city={cityName} />
     </div>
   );
 }
