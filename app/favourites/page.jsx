@@ -1,6 +1,13 @@
+import FavouritesList from './FavouritesList';
+
 export const metadata = {
   title: 'Favourites',
 };
 export default function Favourites() {
-  return <div className="px-6 py-4 text-3xl">Favourite cities</div>;
+  return (
+    <>
+      <h2 className="mb-10 mt-4 text-center">Your favourite cities</h2>
+      <FavouritesList />
+    </>
+  );
 }
