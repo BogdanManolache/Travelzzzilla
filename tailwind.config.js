@@ -5,7 +5,11 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        fluid: 'repeat(auto-fit, minmax(20rem, 1fr))',
+      },
+    },
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 };

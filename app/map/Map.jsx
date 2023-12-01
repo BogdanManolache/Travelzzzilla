@@ -2,6 +2,8 @@
 
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useCities } from '@/contexts/CitiesContext';
+import Flag from 'react-world-flags';
 
 const markerIcon = new L.Icon({
   iconUrl: 'marker.png',
@@ -12,23 +14,35 @@ const markerIcon = new L.Icon({
 });
 
 export default function Map() {
+  const { cities } = useCities();
+
+  const initialLat = cities.at(-1)?.latitude || 51.478;
+  const initialLong = cities.at(-1)?.longitude || 0.0014;
+
   return (
     <MapContainer
-      center={[45.65, 25.6]}
-      zoom={11}
+      center={[initialLat, initialLong]}
+      zoom={8}
       scrollWheelZoom={true}
-      className="h-full"
+      className="h-full pl-2"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         noWrap={true}
       />
-      <Marker position={[45.65, 25.6]} icon={markerIcon}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+      {cities.map(city => (
+        <Marker
+          key={city.id}
+          position={[city.latitude, city.longitude]}
+          icon={markerIcon}
+        >
+          <Popup>
+            <span>{city.name}</span>
+            <Flag code={city.country_code} className="h-6 rounded-full" />
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 }

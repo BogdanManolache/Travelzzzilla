@@ -13,7 +13,7 @@ export default function NavBar() {
 
   return (
     <nav>
-      <ul className="flex flex-col gap-4">
+      <ul className="flex gap-0 text-xs  md:flex-col  md:gap-4 md:text-base">
         <li>
           <Link href="/" className={linkClass}>
             <HiOutlineHome className="stroke-orange-400" />

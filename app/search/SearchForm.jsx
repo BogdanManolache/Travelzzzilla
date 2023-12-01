@@ -25,7 +25,7 @@ export default function SearchForm() {
         value={city}
         onChange={e => setCity(e.target.value)}
       />
-      <Button>Search</Button>
+      <Button type="primary">Search</Button>
     </form>
   );
 }

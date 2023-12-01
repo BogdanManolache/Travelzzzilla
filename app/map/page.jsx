@@ -1,4 +1,6 @@
-import Map from '@/app/map/Map';
+import dynamic from 'next/dynamic';
+
+const Map = dynamic(() => import('./Map'), { ssr: false });
 
 export const metadata = {
   title: 'Map',
