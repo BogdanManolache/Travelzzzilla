@@ -3,7 +3,7 @@
 import { useCities } from '@/contexts/CitiesContext';
 
 import FavouritesListItem from './FavouritesListItem';
-import Link from 'next/link';
+
 import Button from '@/components/Button';
 
 export default function FavouritesList() {

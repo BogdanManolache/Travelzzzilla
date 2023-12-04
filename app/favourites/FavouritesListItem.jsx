@@ -5,16 +5,12 @@ import Link from 'next/link';
 import { HiTrash } from 'react-icons/hi2';
 import Flag from 'react-world-flags';
 import { TbWorldLatitude, TbWorldLongitude, TbMountain } from 'react-icons/tb';
-import { SlPeople } from 'react-icons/sl';
 
 export default function FavouritesListItem({
   country_code,
   name,
-  country,
-  elevation,
   latitude,
   longitude,
-  population,
   id,
   admin1,
 }) {
