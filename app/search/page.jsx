@@ -84,7 +84,7 @@ export default async function SearchPage({ searchParams }) {
       <h2>Find your next travel destination</h2>
       <SearchForm />
 
-      <SearchResults cities={cities} city={cityName} />
+      <SearchResults cities={cities} cityName={cityName} />
     </div>
   );
 }

@@ -1,25 +1,34 @@
 'use client';
 
-import { useCities } from '@/contexts/CitiesContext';
 import { useState } from 'react';
 import { HiOutlineStar, HiStar } from 'react-icons/hi2';
 import Flag from 'react-world-flags';
+import { supabase } from '../db/supabase';
 
 export default function SearchResultsItem({ city }) {
-  const { dispatch } = useCities();
-
   const [isFavourite, setIsFavourite] = useState(false);
 
-  function handleClickFavourite() {
+  async function handleClickFavourite() {
     setIsFavourite(isFavourite => !isFavourite);
 
-    if (!isFavourite)
-      dispatch({
-        type: 'city/added',
-        payload: { ...city },
-      });
+    if (!isFavourite) {
+      await supabase.from('cities').insert([
+        {
+          name: city.name,
+          latitude: city.latitude,
+          longitude: city.longitude,
+          elevation: city.elevation,
+          country_code: city.country_code,
+          country: city.country,
+          admin1: city.admin1,
+          population: city?.population,
+        },
+      ]);
+    }
 
-    if (isFavourite) dispatch({ type: 'city/deleted', payload: city.id });
+    if (isFavourite) {
+      await supabase.from('cities').delete().eq('id', city.id);
+    }
   }
 
   return (

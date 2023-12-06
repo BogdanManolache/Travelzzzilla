@@ -1,24 +1,27 @@
 'use client';
 
-import { useCities } from '@/contexts/CitiesContext';
 import Link from 'next/link';
 import { HiTrash } from 'react-icons/hi2';
 import Flag from 'react-world-flags';
 import { TbWorldLatitude, TbWorldLongitude, TbMountain } from 'react-icons/tb';
-import { SlPeople } from 'react-icons/sl';
+import { supabase } from '../db/supabase';
 
 export default function FavouritesListItem({
   country_code,
   name,
-  country,
-  elevation,
   latitude,
   longitude,
-  population,
-  id,
   admin1,
+  id,
 }) {
-  const { dispatch } = useCities();
+  async function handleDeleteCity() {
+    const { error, status, statusText } = await supabase
+      .from('cities')
+      .delete()
+      .eq('id', id);
+
+    if (error) throw new Error(`${status}: ${statusText}`);
+  }
 
   return (
     <li className="flex items-center justify-between gap-x-6 px-2 py-5 duration-300 hover:shadow-lg">
@@ -51,7 +54,7 @@ export default function FavouritesListItem({
       <HiTrash
         size={32}
         className="cursor-pointer fill-orange-500 duration-300 hover:fill-orange-600"
-        onClick={() => dispatch({ type: 'city/deleted', payload: id })}
+        onClick={handleDeleteCity}
       />
     </li>
   );

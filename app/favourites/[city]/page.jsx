@@ -32,14 +32,9 @@ export default function CityPage() {
     time,
   } = weatherData;
 
-  console.log(weatherData);
   const params = useSearchParams();
   const lat = +params.get('lat');
   const long = +params.get('long');
-
-  const { cities } = useCities();
-  const city = cities.find(city => city.latitude === lat);
-  const { name, country, country_code, population, elevation } = city;
 
   useEffect(
     function () {
@@ -48,7 +43,13 @@ export default function CityPage() {
     [lat, long],
   );
 
+  const { cities } = useCities();
+  const city = cities.find(city => city.latitude === lat);
+
+  if (!city) return <NotFound />;
   if (!lat || !long) return <NotFound />;
+
+  const { name, country, country_code, population, elevation } = city;
 
   return (
     <div className="mx-auto flex w-5/6 flex-col px-4 py-2">

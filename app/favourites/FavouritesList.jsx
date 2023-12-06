@@ -1,22 +1,40 @@
 'use client';
 
-import { useCities } from '@/contexts/CitiesContext';
-
+import { useEffect } from 'react';
+import { supabase } from '../db/supabase';
 import FavouritesListItem from './FavouritesListItem';
-import Link from 'next/link';
 import Button from '@/components/Button';
+import { useRouter } from 'next/navigation';
 
-export default function FavouritesList() {
-  const { cities, dispatch } = useCities();
+export default function FavouritesList({ cities }) {
+  const router = useRouter();
+  useEffect(() => {
+    const channel = supabase
+      .channel('realtime-cities')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'cities' },
+        () => router.refresh(),
+      )
+      .subscribe();
+
+    return () => supabase.removeChannel(channel);
+  }, [router]);
+
+  async function handleDeleteAll() {
+    const { error, status, statusText } = await supabase
+      .from('cities')
+      .delete()
+      .neq('id', 0);
+
+    if (error) throw new Error(`${status}: ${statusText}`);
+  }
 
   return (
     <div className="flex flex-col">
       {cities.length !== 0 && (
         <div className="mr-2 self-end">
-          <Button
-            type="secondary"
-            onClick={() => dispatch({ type: 'cities/deleted' })}
-          >
+          <Button type="secondary" onClick={handleDeleteAll}>
             Clear All
           </Button>
         </div>

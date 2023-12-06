@@ -1,6 +1,6 @@
 import SearchResultsItem from './SearchResultsItem';
 
-export default function SearchResults({ cities, city }) {
+export default function SearchResults({ cities, cityName }) {
   if (!cities)
     return (
       <p className="text-sm text-slate-600">
@@ -12,7 +12,8 @@ export default function SearchResults({ cities, city }) {
   return (
     <div className="flex w-full flex-col gap-6">
       <h3 className="text-center">
-        We were able to retrieve {cities.length} results for &quot;{city}&quot;:
+        We were able to retrieve {cities.length} results for &quot;{cityName}
+        &quot;:
       </h3>
 
       <ul className="flex w-full flex-col gap-1">
