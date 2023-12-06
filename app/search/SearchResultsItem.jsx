@@ -1,34 +1,37 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { HiOutlineStar, HiStar } from 'react-icons/hi2';
 import Flag from 'react-world-flags';
-import { supabase } from '../db/supabase';
 
 export default function SearchResultsItem({ city }) {
   const [isFavourite, setIsFavourite] = useState(false);
+  const router = useRouter();
 
   async function handleClickFavourite() {
     setIsFavourite(isFavourite => !isFavourite);
 
     if (!isFavourite) {
-      await supabase.from('cities').insert([
-        {
-          name: city.name,
-          latitude: city.latitude,
-          longitude: city.longitude,
-          elevation: city.elevation,
-          country_code: city.country_code,
-          country: city.country,
-          admin1: city.admin1,
-          population: city?.population,
+      await fetch('http://localhost:3000/api/cities', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      ]);
+        body: JSON.stringify(city),
+      });
     }
 
     if (isFavourite) {
-      await supabase.from('cities').delete().eq('id', city.id);
+      await fetch(
+        `http://localhost:3000/api/cities/${city.name}?lat=${city.latitude}&long=${city.longitude}`,
+        {
+          method: 'DELETE',
+        },
+      );
     }
+
+    router.refresh();
   }
 
   return (

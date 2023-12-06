@@ -1,33 +1,17 @@
 'use client';
 
-import { useEffect } from 'react';
-import { supabase } from '../db/supabase';
+import { useRouter } from 'next/navigation';
 import FavouritesListItem from './FavouritesListItem';
 import Button from '@/components/Button';
-import { useRouter } from 'next/navigation';
 
-export default function FavouritesList({ cities }) {
+export default function FavouritesList({ cities = [] }) {
   const router = useRouter();
-  useEffect(() => {
-    const channel = supabase
-      .channel('realtime-cities')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'cities' },
-        () => router.refresh(),
-      )
-      .subscribe();
-
-    return () => supabase.removeChannel(channel);
-  }, [router]);
 
   async function handleDeleteAll() {
-    const { error, status, statusText } = await supabase
-      .from('cities')
-      .delete()
-      .neq('id', 0);
-
-    if (error) throw new Error(`${status}: ${statusText}`);
+    await fetch(`http://localhost:3000/api/cities/`, {
+      method: 'DELETE',
+    });
+    router.refresh();
   }
 
   return (
@@ -48,7 +32,7 @@ export default function FavouritesList({ cities }) {
       )}
       <ul role="list" className="mb-2 divide-y divide-slate-200">
         {cities.map(city => (
-          <FavouritesListItem key={city.id} {...city} />
+          <FavouritesListItem key={city._id} {...city} />
         ))}
       </ul>
     </div>

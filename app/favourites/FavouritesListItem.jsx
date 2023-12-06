@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { HiTrash } from 'react-icons/hi2';
 import Flag from 'react-world-flags';
-import { TbWorldLatitude, TbWorldLongitude, TbMountain } from 'react-icons/tb';
-import { supabase } from '../db/supabase';
+import { TbWorldLatitude, TbWorldLongitude } from 'react-icons/tb';
+import { useRouter } from 'next/navigation';
 
 export default function FavouritesListItem({
   country_code,
@@ -12,15 +12,18 @@ export default function FavouritesListItem({
   latitude,
   longitude,
   admin1,
-  id,
+  _id,
 }) {
-  async function handleDeleteCity() {
-    const { error, status, statusText } = await supabase
-      .from('cities')
-      .delete()
-      .eq('id', id);
+  const router = useRouter();
 
-    if (error) throw new Error(`${status}: ${statusText}`);
+  async function handleDeleteCity() {
+    await fetch(
+      `http://localhost:3000/api/cities/${name}?lat=${latitude}&long=${longitude}`,
+      {
+        method: 'DELETE',
+      },
+    );
+    router.refresh();
   }
 
   return (
