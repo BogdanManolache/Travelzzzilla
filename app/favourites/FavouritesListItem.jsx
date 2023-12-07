@@ -6,6 +6,7 @@ import Flag from 'react-world-flags';
 import { TbWorldLatitude, TbWorldLongitude } from 'react-icons/tb';
 import { useRouter } from 'next/navigation';
 
+
 export default function FavouritesListItem({
   country_code,
   name,
