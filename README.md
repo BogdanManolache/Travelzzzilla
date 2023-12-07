@@ -1,15 +1,12 @@
 # Overview
 
-This is a NextJS project which is intended to provide the user a way to search for cities to visit and to be able to save the returned information into a database so that it can be viewed later.
+This is a NextJS project which is intended to provide the user a way to search for cities to visit and to be able to save the returned information into a database so that it can be accesesed later.
+
+The user can also view the cities saved to "Favourites" on a map and can check the weather for a certain city by going to its page.
 
 ### Built with:
 
-Next.js
-MongoDB with Mongoose
-Leaflet
-Tailwind CSS
-React Icons
-React World Flags
+Next.js, MongoDB with Mongoose, Leaflet, Tailwind CSS, React Icons,React World Flags
 
 ## Getting Started
 
