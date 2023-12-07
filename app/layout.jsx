@@ -4,7 +4,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
 import Container from '@/components/Container';
-import CitiesContextProvider from '@/contexts/CitiesContext';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
@@ -25,9 +24,7 @@ export default function RootLayout({ children }) {
         <Header />
         <Sidebar />
         <main className="col-span-2 overflow-y-scroll scrollbar-thin scrollbar-track-transparent  scrollbar-thumb-slate-300 scrollbar-thumb-rounded-full md:col-span-1">
-          <Container>
-            <CitiesContextProvider>{children}</CitiesContextProvider>
-          </Container>
+          <Container>{children}</Container>
         </main>
         <Footer />
       </body>

@@ -2,7 +2,7 @@
 
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useCities } from '@/contexts/CitiesContext';
+
 import Flag from 'react-world-flags';
 
 const markerIcon = new L.Icon({
@@ -13,9 +13,7 @@ const markerIcon = new L.Icon({
   popupAnchor: [-3, -38],
 });
 
-export default function Map() {
-  const { cities } = useCities();
-
+export default function Map({ cities }) {
   const initialLat = cities.at(-1)?.latitude || 51.478;
   const initialLong = cities.at(-1)?.longitude || 0.0014;
 
@@ -33,7 +31,7 @@ export default function Map() {
       />
       {cities.map(city => (
         <Marker
-          key={city.id}
+          key={city._id}
           position={[city.latitude, city.longitude]}
           icon={markerIcon}
         >

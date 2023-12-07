@@ -1,20 +1,31 @@
 'use client';
 
-import { useCities } from '@/contexts/CitiesContext';
 import Link from 'next/link';
 import { HiTrash } from 'react-icons/hi2';
 import Flag from 'react-world-flags';
-import { TbWorldLatitude, TbWorldLongitude, TbMountain } from 'react-icons/tb';
+import { TbWorldLatitude, TbWorldLongitude } from 'react-icons/tb';
+import { useRouter } from 'next/navigation';
+
 
 export default function FavouritesListItem({
   country_code,
   name,
   latitude,
   longitude,
-  id,
   admin1,
+  _id,
 }) {
-  const { dispatch } = useCities();
+  const router = useRouter();
+
+  async function handleDeleteCity() {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/cities/${name}?lat=${latitude}&long=${longitude}`,
+      {
+        method: 'DELETE',
+      },
+    );
+    router.refresh();
+  }
 
   return (
     <li className="flex items-center justify-between gap-x-6 px-2 py-5 duration-300 hover:shadow-lg">
@@ -47,7 +58,7 @@ export default function FavouritesListItem({
       <HiTrash
         size={32}
         className="cursor-pointer fill-orange-500 duration-300 hover:fill-orange-600"
-        onClick={() => dispatch({ type: 'city/deleted', payload: id })}
+        onClick={handleDeleteCity}
       />
     </li>
   );

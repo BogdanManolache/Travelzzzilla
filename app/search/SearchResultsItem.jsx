@@ -1,25 +1,52 @@
 'use client';
 
-import { useCities } from '@/contexts/CitiesContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { HiOutlineStar, HiStar } from 'react-icons/hi2';
 import Flag from 'react-world-flags';
 
-export default function SearchResultsItem({ city }) {
-  const { dispatch } = useCities();
-
+export default function SearchResultsItem({ city, citiesFromDb }) {
   const [isFavourite, setIsFavourite] = useState(false);
+  const router = useRouter();
 
-  function handleClickFavourite() {
+  useEffect(
+    function () {
+      if (
+        citiesFromDb.find(
+          c =>
+            c.name === city.name &&
+            c.latitude === city.latitude &&
+            c.longitude === city.longitude,
+        )
+      )
+        setIsFavourite(true);
+    },
+    [city.name, city.latitude, city.longitude, citiesFromDb],
+  );
+
+  async function handleClickFavourite() {
     setIsFavourite(isFavourite => !isFavourite);
 
-    if (!isFavourite)
-      dispatch({
-        type: 'city/added',
-        payload: { ...city },
+    if (!isFavourite) {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cities`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(city),
       });
+    }
 
-    if (isFavourite) dispatch({ type: 'city/deleted', payload: city.id });
+    if (isFavourite) {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/cities/${city.name}?lat=${city.latitude}&long=${city.longitude}`,
+        {
+          method: 'DELETE',
+        },
+      );
+    }
+
+    router.refresh();
   }
 
   return (
