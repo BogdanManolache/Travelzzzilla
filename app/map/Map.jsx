@@ -31,7 +31,7 @@ export default function Map({ cities }) {
       />
       {cities.map(city => (
         <Marker
-          key={city.id}
+          key={city._id}
           position={[city.latitude, city.longitude]}
           icon={markerIcon}
         >

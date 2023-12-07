@@ -18,7 +18,7 @@ export default function FavouritesListItem({
 
   async function handleDeleteCity() {
     await fetch(
-      `http://localhost:3000/api/cities/${name}?lat=${latitude}&long=${longitude}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/cities/${name}?lat=${latitude}&long=${longitude}`,
       {
         method: 'DELETE',
       },

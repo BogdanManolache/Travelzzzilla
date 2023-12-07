@@ -1,19 +1,34 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { HiOutlineStar, HiStar } from 'react-icons/hi2';
 import Flag from 'react-world-flags';
 
-export default function SearchResultsItem({ city }) {
+export default function SearchResultsItem({ city, citiesFromDb }) {
   const [isFavourite, setIsFavourite] = useState(false);
   const router = useRouter();
+
+  useEffect(
+    function () {
+      if (
+        citiesFromDb.find(
+          c =>
+            c.name === city.name &&
+            c.latitude === city.latitude &&
+            c.longitude === city.longitude,
+        )
+      )
+        setIsFavourite(true);
+    },
+    [city.name, city.latitude, city.longitude, citiesFromDb],
+  );
 
   async function handleClickFavourite() {
     setIsFavourite(isFavourite => !isFavourite);
 
     if (!isFavourite) {
-      await fetch('http://localhost:3000/api/cities', {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cities`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,7 +39,7 @@ export default function SearchResultsItem({ city }) {
 
     if (isFavourite) {
       await fetch(
-        `http://localhost:3000/api/cities/${city.name}?lat=${city.latitude}&long=${city.longitude}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/cities/${city.name}?lat=${city.latitude}&long=${city.longitude}`,
         {
           method: 'DELETE',
         },

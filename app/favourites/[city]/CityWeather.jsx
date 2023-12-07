@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 
 import { getTime, getWeather } from '@/lib/helpers';
 
@@ -9,7 +8,7 @@ import { GiWindsock } from 'react-icons/gi';
 import { IoRainyOutline } from 'react-icons/io5';
 import { TbClockHour3, TbDroplet, TbTemperatureCelsius } from 'react-icons/tb';
 
-export default function CityWeather() {
+export default function CityWeather({ latitude, longitude }) {
   const [weatherData, setWeatherData] = useState({});
   const {
     temperature_2m: temperature,
@@ -20,15 +19,11 @@ export default function CityWeather() {
     time,
   } = weatherData;
 
-  const params = useSearchParams();
-  const lat = +params.get('lat');
-  const long = +params.get('long');
-
   useEffect(
     function () {
-      getWeather(lat, long, setWeatherData);
+      getWeather(latitude, longitude, setWeatherData);
     },
-    [lat, long],
+    [latitude, longitude],
   );
 
   return (

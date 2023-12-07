@@ -1,22 +1,11 @@
-'use client';
-
-import NotFound from '@/app/not-found';
-import { useSearchParams } from 'next/navigation';
 import { HiOutlineMapPin } from 'react-icons/hi2';
 import { SlPeople } from 'react-icons/sl';
 import { TbMountain, TbWorldLatitude, TbWorldLongitude } from 'react-icons/tb';
 import Flag from 'react-world-flags';
 
-export default function CityGeography({ cities }) {
-  const params = useSearchParams();
-  const lat = +params.get('lat');
-  const long = +params.get('long');
-  const city = cities.find(city => city.latitude === lat);
-
-  if (!city) return <NotFound />;
-  if (!lat || !long) return <NotFound />;
-
-  const { country, country_code, population, elevation } = city;
+export default function CityGeography({ city }) {
+  const { country, country_code, population, elevation, latitude, longitude } =
+    city;
 
   return (
     <div className="mb-10">
@@ -40,11 +29,11 @@ export default function CityGeography({ cities }) {
         <li className="flex items-center justify-center gap-8">
           <p className="flex items-center justify-center gap-2">
             <TbWorldLatitude className="stroke-slate-500" />
-            <span>Latitude: {lat}&deg;</span>
+            <span>Latitude: {latitude}&deg;</span>
           </p>
           <p className="flex items-center justify-center gap-2">
             <TbWorldLongitude className="stroke-slate-500" />
-            <span>Longitude: {long}&deg;</span>
+            <span>Longitude: {longitude}&deg;</span>
           </p>
         </li>
         <li>

@@ -8,7 +8,7 @@ export default function FavouritesList({ cities = [] }) {
   const router = useRouter();
 
   async function handleDeleteAll() {
-    await fetch(`http://localhost:3000/api/cities/`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cities/`, {
       method: 'DELETE',
     });
     router.refresh();
