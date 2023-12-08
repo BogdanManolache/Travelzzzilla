@@ -1,21 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import SearchResultsItem from './SearchResultsItem';
-import { getAllCities } from '@/lib/helpers';
+
+import useCities from '@/hooks/useCities';
 
 export default function SearchResults({ cities, cityName }) {
-  const [citiesFromDb, setCitiesFromDb] = useState([]);
-  const router = useRouter();
-
-  useEffect(function () {
-    async function getCitiesFromDb() {
-      const { cities } = await getAllCities();
-      setCitiesFromDb(cities);
-    }
-    getCitiesFromDb();
-  }, []);
+  const { cities: citiesFromDb } = useCities();
 
   if (!cities)
     return (

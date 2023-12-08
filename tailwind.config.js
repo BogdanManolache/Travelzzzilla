@@ -9,6 +9,9 @@ module.exports = {
       gridTemplateColumns: {
         fluid: 'repeat(auto-fit, minmax(20rem, 1fr))',
       },
+      colors: {
+        booking: '#23387E',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],

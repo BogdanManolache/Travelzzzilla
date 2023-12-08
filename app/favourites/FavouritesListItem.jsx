@@ -1,11 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { HiTrash } from 'react-icons/hi2';
-import Flag from 'react-world-flags';
-import { TbWorldLatitude, TbWorldLongitude } from 'react-icons/tb';
-import { useRouter } from 'next/navigation';
 
+import Flag from 'react-world-flags';
+import {
+  TbBrandBooking,
+  TbWorldLatitude,
+  TbWorldLongitude,
+} from 'react-icons/tb';
 
 export default function FavouritesListItem({
   country_code,
@@ -13,20 +15,7 @@ export default function FavouritesListItem({
   latitude,
   longitude,
   admin1,
-  _id,
 }) {
-  const router = useRouter();
-
-  async function handleDeleteCity() {
-    await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/cities/${name}?lat=${latitude}&long=${longitude}`,
-      {
-        method: 'DELETE',
-      },
-    );
-    router.refresh();
-  }
-
   return (
     <li className="flex items-center justify-between gap-x-6 px-2 py-5 duration-300 hover:shadow-lg">
       <Link
@@ -55,11 +44,13 @@ export default function FavouritesListItem({
           </p>
         </div>
       </Link>
-      <HiTrash
-        size={32}
-        className="cursor-pointer fill-orange-500 duration-300 hover:fill-orange-600"
-        onClick={handleDeleteCity}
-      />
+
+      <a
+        href={`https://www.booking.com/searchresults.html?ss=${name}`}
+        target="_blank"
+      >
+        <TbBrandBooking className="fill-booking stroke-white" size={48} />
+      </a>
     </li>
   );
 }

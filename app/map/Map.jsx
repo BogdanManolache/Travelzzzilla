@@ -4,6 +4,9 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import Flag from 'react-world-flags';
+import useCities from '@/hooks/useCities';
+import Loader from '../loading';
+import { TbBrandBooking } from 'react-icons/tb';
 
 const markerIcon = new L.Icon({
   iconUrl: 'marker.png',
@@ -13,7 +16,11 @@ const markerIcon = new L.Icon({
   popupAnchor: [-3, -38],
 });
 
-export default function Map({ cities }) {
+export default function Map() {
+  const { cities, isLoading } = useCities();
+
+  if (isLoading) return <Loader />;
+
   const initialLat = cities.at(-1)?.latitude || 51.478;
   const initialLong = cities.at(-1)?.longitude || 0.0014;
 
@@ -38,6 +45,12 @@ export default function Map({ cities }) {
           <Popup>
             <span>{city.name}</span>
             <Flag code={city.country_code} className="h-6 rounded-full" />
+            <a
+              href={`https://www.booking.com/searchresults.html?ss=${city.name}`}
+              target="_blank"
+            >
+              <TbBrandBooking className="fill-booking stroke-white" size={40} />
+            </a>
           </Popup>
         </Marker>
       ))}

@@ -28,7 +28,7 @@ export default function SearchResultsItem({ city, citiesFromDb }) {
     setIsFavourite(isFavourite => !isFavourite);
 
     if (!isFavourite) {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cities`, {
+      await fetch(`/api/cities`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ export default function SearchResultsItem({ city, citiesFromDb }) {
 
     if (isFavourite) {
       await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/cities/${city.name}?lat=${city.latitude}&long=${city.longitude}`,
+        `/api/cities/${city.name}?lat=${city.latitude}&long=${city.longitude}`,
         {
           method: 'DELETE',
         },
