@@ -10,6 +10,9 @@ export default function CityDelete({ name, latitude, longitude }) {
     await fetch(`/api/cities/${name}?lat=${latitude}&long=${longitude}`, {
       method: 'DELETE',
     });
+    await fetch(`/api/top/${name}?lat=${latitude}&long=${longitude}`, {
+      method: 'DELETE',
+    });
 
     router.push('/favourites');
   }
