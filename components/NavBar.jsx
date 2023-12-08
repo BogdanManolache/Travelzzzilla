@@ -9,7 +9,7 @@ import {
 
 export default function NavBar() {
   const linkClass =
-    'flex items-center gap-2 px-4 py-2 hover:bg-slate-200 focus:outline-none focus-visible:ring focus-visible:ring-slate-200';
+    'flex items-center gap-1 sm:gap-2 px-4 py-2 hover:bg-slate-200 focus:outline-none focus-visible:ring focus-visible:ring-slate-200';
 
   return (
     <nav>

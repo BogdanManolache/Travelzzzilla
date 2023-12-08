@@ -12,6 +12,9 @@ module.exports = {
       colors: {
         booking: '#23387E',
       },
+      height: {
+        screen: ['100dvh'],
+      },
     },
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
