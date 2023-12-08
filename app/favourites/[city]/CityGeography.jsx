@@ -1,11 +1,21 @@
+'use client';
+
+import useCities from '@/hooks/useCities';
+
 import { HiOutlineMapPin } from 'react-icons/hi2';
 import { SlPeople } from 'react-icons/sl';
 import { TbMountain, TbWorldLatitude, TbWorldLongitude } from 'react-icons/tb';
 import Flag from 'react-world-flags';
+import Loader from '@/app/loading';
 
-export default function CityGeography({ city }) {
-  const { country, country_code, population, elevation, latitude, longitude } =
-    city;
+export default function CityGeography({ latitude, longitude }) {
+  const { cities } = useCities();
+
+  const city = cities.find(city => city.latitude === +latitude);
+
+  if (!city) return <Loader />;
+
+  const { country, country_code, population, elevation } = city;
 
   return (
     <div className="mb-10">

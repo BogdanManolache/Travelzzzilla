@@ -7,7 +7,7 @@ export default function Button({ children, type, onClick }) {
 
   if (type === 'secondary') {
     btnClass =
-      'mb-4 rounded-md bg-slate-200 px-4 py-2 text-sm font-semibold uppercase tracking-wide duration-300 hover:bg-slate-800 hover:text-slate-50 focus:outline-none focus-visible:ring focus-visible:ring-slate-400';
+      'mb-4 rounded-md bg-slate-200 px-4 py-2 text-sm font-semibold uppercase tracking-wide duration-300 hover:bg-slate-800 hover:text-slate-50 focus:outline-none focus-visible:ring focus-visible:ring-slate-400 flex items-center justify-center gap-2 group';
   }
 
   return (

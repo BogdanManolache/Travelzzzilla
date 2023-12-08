@@ -1,25 +1,39 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import useCities from '@/hooks/useCities';
 import FavouritesListItem from './FavouritesListItem';
 import Button from '@/components/Button';
+import Loader from '../loading';
+import Error from '../error';
+import { HiTrash } from 'react-icons/hi2';
 
-export default function FavouritesList({ cities = [] }) {
+export default function FavouritesList() {
+  const { cities, isLoading, error } = useCities();
+
   const router = useRouter();
 
   async function handleDeleteAll() {
-    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/cities/`, {
+    await fetch(`/api/cities/`, {
       method: 'DELETE',
     });
-    router.refresh();
+
+    router.push('/search');
   }
+
+  if (error) return <Error />;
+  if (isLoading) return <Loader />;
 
   return (
     <div className="flex flex-col">
       {cities.length !== 0 && (
         <div className="mr-2 self-end">
           <Button type="secondary" onClick={handleDeleteAll}>
-            Clear All
+            <span>Clear All</span>
+            <HiTrash
+              size={16}
+              className="cursor-pointer fill-slate-800 duration-300 group-hover:fill-slate-50"
+            />
           </Button>
         </div>
       )}

@@ -7,8 +7,11 @@ import { getTime, getWeather } from '@/lib/helpers';
 import { GiWindsock } from 'react-icons/gi';
 import { IoRainyOutline } from 'react-icons/io5';
 import { TbClockHour3, TbDroplet, TbTemperatureCelsius } from 'react-icons/tb';
+import Loader from '@/app/loading';
 
 export default function CityWeather({ latitude, longitude }) {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [weatherData, setWeatherData] = useState({});
   const {
     temperature_2m: temperature,
@@ -21,10 +24,18 @@ export default function CityWeather({ latitude, longitude }) {
 
   useEffect(
     function () {
-      getWeather(latitude, longitude, setWeatherData);
+      try {
+        getWeather(latitude, longitude, setWeatherData);
+      } catch (error) {
+        throw error;
+      } finally {
+        setIsLoading(false);
+      }
     },
     [latitude, longitude],
   );
+
+  if (isLoading) return <Loader />;
 
   return (
     <div>
