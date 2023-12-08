@@ -5,10 +5,11 @@ import 'leaflet/dist/leaflet.css';
 
 import Flag from 'react-world-flags';
 import useCities from '@/hooks/useCities';
+import useTopCities from '@/hooks/useTopCities';
 import Loader from '../loading';
 import { TbBrandBooking } from 'react-icons/tb';
 
-const markerIcon = new L.Icon({
+const favMarkerIcon = new L.Icon({
   iconUrl: 'marker.png',
   iconRetinaUrl: 'marker.png',
   iconSize: [24, 41],
@@ -16,8 +17,17 @@ const markerIcon = new L.Icon({
   popupAnchor: [-3, -38],
 });
 
+const topMarkerIcon = new L.Icon({
+  iconUrl: 'heart.png',
+  iconRetinaUrl: 'heart.png',
+  iconSize: [32, 28],
+  iconAnchor: [12, 41],
+  popupAnchor: [-3, -38],
+});
+
 export default function Map() {
   const { cities, isLoading } = useCities();
+  const { cities: topCities } = useTopCities();
 
   if (isLoading) return <Loader />;
 
@@ -40,7 +50,16 @@ export default function Map() {
         <Marker
           key={city._id}
           position={[city.latitude, city.longitude]}
-          icon={markerIcon}
+          icon={
+            topCities.find(
+              c =>
+                c.name === city.name &&
+                c.latitude === city.latitude &&
+                c.longitude === city.longitude,
+            )
+              ? topMarkerIcon
+              : favMarkerIcon
+          }
         >
           <Popup>
             <span>{city.name}</span>

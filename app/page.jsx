@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function HomePage() {
   return (
     <div className="hero-image relative h-full w-full bg-cover bg-center ">
-      <div className="absolute left-1/2 top-28 w-1/2 -translate-x-1/2 text-center md:top-14">
+      <div className="absolute left-1/2 top-10 w-1/2 -translate-x-1/2 text-center md:top-12">
         <h1 className="text-center text-3xl font-bold leading-tight text-slate-50 sm:text-5xl">
           Find the perfect destination and go!
         </h1>

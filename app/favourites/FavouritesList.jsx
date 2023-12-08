@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import useCities from '@/hooks/useCities';
+import useTopCities from '@/hooks/useTopCities';
 import FavouritesListItem from './FavouritesListItem';
 import Button from '@/components/Button';
 import Loader from '../loading';
@@ -10,6 +11,11 @@ import { HiTrash } from 'react-icons/hi2';
 
 export default function FavouritesList() {
   const { cities, isLoading, error } = useCities();
+  const {
+    cities: topCities,
+    isLoading: isLoadingTopCities,
+    error: errorTopCities,
+  } = useTopCities();
 
   const router = useRouter();
 
@@ -17,12 +23,15 @@ export default function FavouritesList() {
     await fetch(`/api/cities/`, {
       method: 'DELETE',
     });
+    await fetch(`/api/top/`, {
+      method: 'DELETE',
+    });
 
     router.push('/search');
   }
 
-  if (error) return <Error />;
-  if (isLoading) return <Loader />;
+  if (error || errorTopCities) return <Error />;
+  if (isLoading || isLoadingTopCities) return <Loader />;
 
   return (
     <div className="flex flex-col">
@@ -46,7 +55,11 @@ export default function FavouritesList() {
       )}
       <ul role="list" className="mb-2 divide-y divide-slate-200">
         {cities.map(city => (
-          <FavouritesListItem key={city._id} {...city} />
+          <FavouritesListItem
+            key={city._id}
+            city={city}
+            topCities={topCities}
+          />
         ))}
       </ul>
     </div>
