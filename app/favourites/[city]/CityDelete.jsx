@@ -18,7 +18,7 @@ export default function CityDelete({ name, latitude, longitude }) {
   }
 
   return (
-    <div className="group relative mb-4 self-end">
+    <div className="group relative mb-6 self-end">
       <HiTrash
         size={32}
         className="cursor-pointer fill-orange-500 duration-300 hover:fill-orange-600"

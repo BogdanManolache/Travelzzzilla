@@ -17,7 +17,7 @@ export default function CityPage({ params, searchParams }) {
   if (!latitude || !longitude) notFound();
 
   return (
-    <div className="relative mx-auto flex w-5/6 flex-col  px-4 py-2">
+    <div className="relative mx-auto flex w-5/6 flex-col px-4 py-2">
       <h2 className="mt-2 text-center">Stats about {decodeURI(name)}</h2>
       <CityDelete name={name} latitude={latitude} longitude={longitude} />
       <CityGeography latitude={latitude} longitude={longitude} />
