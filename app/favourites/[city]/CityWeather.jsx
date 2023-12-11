@@ -39,27 +39,27 @@ export default function CityWeather({ latitude, longitude }) {
 
   return (
     <div>
-      <h4 className="mb-4 font-semibold">Current weather:</h4>
-      <ul className="grid grid-cols-fluid gap-4">
-        <li className="flex flex-col items-center gap-2">
+      <h4 className="mb-4 text-center font-semibold">Current weather</h4>
+      <ul className="flex flex-col items-center justify-between gap-4 p-4 text-sm lg:flex-row">
+        <li className="flex w-full flex-col items-center gap-3 self-stretch rounded-sm bg-slate-100 p-4 shadow-md lg:flex-1">
           <TbTemperatureCelsius size={40} className="stroke-slate-500" />
           <span>
             {temperature} (real feel: {realFeel})
           </span>
         </li>
-        <li className="flex flex-col items-center gap-2">
+        <li className="flex w-full flex-col items-center gap-3 self-stretch rounded-sm bg-slate-100 p-4 shadow-md lg:flex-1">
           <GiWindsock size={40} className="fill-slate-500" />
           <span>{windSpeed} km/h</span>
         </li>
-        <li className="flex flex-col items-center gap-2">
+        <li className="flex w-full flex-col items-center gap-3 self-stretch rounded-sm bg-slate-100 p-4 shadow-md lg:flex-1">
           <IoRainyOutline size={40} className="stroke-slate-500" />
           <span>{precipitation} mm</span>
         </li>
-        <li className="flex flex-col items-center gap-2">
+        <li className="flex w-full flex-col items-center gap-3 self-stretch rounded-sm bg-slate-100 p-4 shadow-md lg:flex-1">
           <TbDroplet size={40} className="stroke-slate-500" />
           <span>{humidity} %</span>
         </li>
-        <li className="flex flex-col items-center gap-2">
+        <li className="flex w-full flex-col items-center gap-3 self-stretch rounded-sm bg-slate-100 p-4 shadow-md lg:flex-1">
           <TbClockHour3 size={40} className="stroke-slate-500" />
           <span>Updated at {getTime(time)}</span>
         </li>
