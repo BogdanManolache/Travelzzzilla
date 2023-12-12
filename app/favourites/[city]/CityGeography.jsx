@@ -10,7 +10,6 @@ import Loader from '@/app/loading';
 import { notFound } from 'next/navigation';
 import { useEffect } from 'react';
 
-export async function generateStaticParams() {}
 
 export default function CityGeography({ latitude, longitude, name }) {
   const { cities } = useCities();
