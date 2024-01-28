@@ -9,8 +9,8 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata = {
   title: {
-    default: 'Travelzilla',
-    template: 'Travelzilla | %s',
+    default: 'Travelzzzilla',
+    template: 'Travelzzzilla | %s',
   },
   description: 'Find the perfect destination',
 };
