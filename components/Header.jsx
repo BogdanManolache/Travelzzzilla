@@ -13,7 +13,7 @@ export default function Header() {
       <Link href="/" className="flex items-center">
         <Image src="/logo.png" width={64} height={64} alt="Logo" />
         <span className={`${barlowCondensed.className} text-4xl  font-bold`}>
-          Travelzilla
+          Travelzzzilla
         </span>
       </Link>
     </header>
