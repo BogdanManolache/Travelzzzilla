@@ -10,12 +10,12 @@ import Loader from '@/app/loading';
 import { notFound } from 'next/navigation';
 import { useEffect } from 'react';
 
-
 export default function CityGeography({ latitude, longitude, name }) {
   const { cities } = useCities();
 
+  // use decodeURI for cities with more than 1 word in the name
   const city = cities.find(
-    city => city.name === name && city.latitude === +latitude,
+    city => city.name === decodeURI(name) && city.latitude === +latitude,
   );
 
   if (!city) return <Loader />;
