@@ -19,7 +19,9 @@ export default async function Header() {
     <header className="col-span-2 col-start-1 flex items-center justify-between border-b-2 pl-6 sm:col-span-1  sm:col-start-1 md:col-span-2 md:col-start-1 md:border-none">
       <Link href="/" className="flex items-center">
         <Image src="/logo.png" width={64} height={64} alt="Logo" />
-        <span className={`${barlowCondensed.className} text-4xl  font-bold`}>
+        <span
+          className={`${barlowCondensed.className} inline-block text-2xl font-bold sm:hidden  md:inline-block md:text-4xl`}
+        >
           Travelzzzilla
         </span>
       </Link>
