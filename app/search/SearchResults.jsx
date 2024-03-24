@@ -4,7 +4,7 @@ import SearchResultsItem from './SearchResultsItem';
 
 import useCities from '@/hooks/useCities';
 
-export default function SearchResults({ cities, cityName }) {
+export default function SearchResults({ cities, cityName, userToken }) {
   const { cities: citiesFromDb } = useCities();
 
   if (!cities)
@@ -28,6 +28,7 @@ export default function SearchResults({ cities, cityName }) {
             city={city}
             key={city.id}
             citiesFromDb={citiesFromDb}
+            userToken={userToken}
           />
         ))}
       </ul>

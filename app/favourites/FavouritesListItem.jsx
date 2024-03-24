@@ -12,7 +12,7 @@ import {
 } from 'react-icons/tb';
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi2';
 
-export default function FavouritesListItem({ city, topCities }) {
+export default function FavouritesListItem({ city, topCities, userToken }) {
   const { country_code, name, latitude, longitude, admin1 } = city;
 
   const [isTop, setIsTop] = useState(false);
@@ -89,24 +89,26 @@ export default function FavouritesListItem({ city, topCities }) {
       >
         <TbBrandBooking className="fill-booking stroke-white" size={48} />
       </a>
-      {!isTop ? (
-        <HiOutlineHeart
-          size={32}
-          className="cursor-pointer stroke-red-500"
-          onClick={handleClickHeart}
-        />
-      ) : (
-        <div className="group relative">
-          <HiHeart
-            size={32}
-            className="cursor-pointer fill-red-500"
-            onClick={handleClickHeart}
-          />
-          <p className="max-w-32 absolute -left-[150%] -top-[80%] z-10 hidden rounded-bl-md rounded-tl-md rounded-tr-xl bg-slate-200/90 px-2 py-1 text-center text-[10px] font-semibold uppercase tracking-wide text-red-500  duration-300 group-hover:block">
-            Top city!
-          </p>
-        </div>
-      )}
+      {!isTop
+        ? userToken?.email && (
+            <HiOutlineHeart
+              size={32}
+              className="cursor-pointer stroke-red-500"
+              onClick={handleClickHeart}
+            />
+          )
+        : userToken?.email && (
+            <div className="group relative">
+              <HiHeart
+                size={32}
+                className="cursor-pointer fill-red-500"
+                onClick={handleClickHeart}
+              />
+              <p className="max-w-32 absolute -left-[150%] -top-[80%] z-10 hidden rounded-bl-md rounded-tl-md rounded-tr-xl bg-slate-200/90 px-2 py-1 text-center text-[10px] font-semibold uppercase tracking-wide text-red-500  duration-300 group-hover:block">
+                Top city!
+              </p>
+            </div>
+          )}
     </li>
   );
 }

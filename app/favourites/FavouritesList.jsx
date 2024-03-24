@@ -9,7 +9,7 @@ import Loader from '../loading';
 import Error from '../error';
 import { HiTrash } from 'react-icons/hi2';
 
-export default function FavouritesList() {
+export default function FavouritesList({ userToken }) {
   const { cities, isLoading, error } = useCities();
   const {
     cities: topCities,
@@ -35,7 +35,7 @@ export default function FavouritesList() {
 
   return (
     <div className="flex flex-col">
-      {cities.length !== 0 && (
+      {cities.length !== 0 && userToken?.email && (
         <div className="mr-2 self-end">
           <Button type="secondary" onClick={handleDeleteAll}>
             <span>Clear All</span>
@@ -53,12 +53,13 @@ export default function FavouritesList() {
           destinations. 😁
         </p>
       )}
-      <ul role="list" className="mb-2 divide-y divide-slate-200">
+      <ul role="list" className="mb-2 mt-4 divide-y divide-slate-200">
         {cities.map(city => (
           <FavouritesListItem
             key={city._id}
             city={city}
             topCities={topCities}
+            userToken={userToken}
           />
         ))}
       </ul>
