@@ -41,4 +41,6 @@ https://travelzzzilla.vercel.app/
 There are separate branches in this repo corresponding to each stage of the project's development.
 
 
+### Google Lighthouse:
+
 ![alt text](image.png)
