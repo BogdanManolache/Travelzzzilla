@@ -39,3 +39,6 @@ https://travelzzzilla.vercel.app/
 ## IMPORTANT
 
 There are separate branches in this repo corresponding to each stage of the project's development.
+
+
+![alt text](image.png)
